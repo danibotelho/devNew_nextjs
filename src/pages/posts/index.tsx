@@ -1,5 +1,7 @@
 import { GetStaticProps } from 'next';
 import SEO from '../../components/SEO';
+import Link from 'next/link';
+import styles from './posts.module.scss';
 
 interface Post {
   id: string;
@@ -9,28 +11,28 @@ interface PostsProps {
   posts: Post[];
 }
 
-export default function Posts({ posts }: PostsProps) {
+export default function Posts() {
   return (
-    <div>
+    <>
       <SEO title="Posts" />
-      <h1>Listagem de Posts</h1>
-      <ul>
-        {posts.map((post, index) => (
-          <li key={index}>{post.title}</li>
-        ))}
-      </ul>
-    </div>
+      <main className={styles.container}>
+        <div className={styles.posts}>
+          <Link href="#">
+            <a>
+              <time>25 de dezembro de 2021</time>
+              <strong>Titulo</strong>
+              <p>Paragrafo</p>
+            </a>
+          </Link>
+        </div>
+      </main>
+    </>
   );
 }
 
-export const getStaticProps: GetStaticProps<PostsProps> = async () => {
-  const res = await fetch('http://localhost:8080/posts');
-  const posts = await res.json();
-
+export const getStaticProps: GetStaticProps = async () => {
   return {
-    props: {
-      posts,
-    },
-    revalidate: 5, // In seconds
+    props: {},
+    revalidate: 60 * 60 * 12, // 12 HORAS
   };
 };

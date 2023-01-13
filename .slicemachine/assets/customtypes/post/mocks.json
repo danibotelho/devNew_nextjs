@@ -1,0 +1,28 @@
+{
+  "uid": {
+    "__TYPE__": "UIDContent",
+    "value": "poor"
+  },
+  "title": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "heading1",
+        "content": {
+          "text": "Zipper"
+        }
+      }
+    ]
+  },
+  "content": {
+    "__TYPE__": "StructuredTextContent",
+    "value": [
+      {
+        "type": "paragraph",
+        "content": {
+          "text": "Voluptate qui enim minim duis proident incididunt minim cupidatat. Do cupidatat culpa eu elit cillum excepteur laboris aliqua nisi labore velit mollit elit aute qui."
+        }
+      }
+    ]
+  }
+}
