@@ -5,12 +5,14 @@ import SEO from '../../components/SEO';
 import { getPrismicClient } from '../../services/prismic';
 import { RichText } from 'prismic-dom';
 import styles from './posts.module.scss';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 interface Post {
   slug: string;
   title: string;
   excerpt: string;
-  updateAt: string;
+  updatedAt: string;
 }
 
 interface PostsProps {
@@ -45,7 +47,7 @@ export default function Posts({ posts }: PostsProps) {
           {posts.map(post => (
             <Link href={`/posts/${post.slug}`} key={post.slug}>
               <a>
-                <time>{post.updateAt}</time>
+                <time>{post.updatedAt}</time>
                 <strong>{post.title}</strong>
                 <p>{post.excerpt}</p>
               </a>
@@ -75,13 +77,10 @@ export const getStaticProps: GetStaticProps = async () => {
       excerpt:
         document.data.content.find(content => content.type === 'paragraph')
           ?.text ?? '',
-      updateAt: new Date(post.last_publication_date).toLocaleDateString(
-        'pt-BR',
-        {
-          day: '2-digit',
-          month: 'long',
-          year: 'numeric',
-        },
+      updatedAt: format(
+        new Date(post.last_publication_date),
+        "d 'de' MMMM 'de' yyyy",
+        { locale: ptBR },
       ),
     };
   });
